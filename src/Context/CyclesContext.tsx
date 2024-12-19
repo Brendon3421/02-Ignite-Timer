@@ -32,12 +32,8 @@ interface CyclesContextProviderPros {
 }
 
 
-interface CyclesState {
-    cycles: Cycle[]
-    activeCycleId: string | null
-}
-
-export const cyclesContext = createContext({} as CyclesContextType);
+// Simples teste para criar o contexto
+export const cyclesContext = createContext<CyclesContextType | null>(null);
 
 // Reducer Function
 function cyclesReducer(state: { cycles: Cycle[]; activeCycleId: string | null }, action: any) {
@@ -70,7 +66,7 @@ function cyclesReducer(state: { cycles: Cycle[]; activeCycleId: string | null },
 }
 
 export function CyclesContextProvider({ children }: CyclesContextProviderPros) {
-    const [state, dispatch] = useReducer((state: CyclesState, action: any) => {
+    const [state, dispatch] = useReducer(cyclesReducer, {
         cycles: [],
         activeCycleId: null,
     });
